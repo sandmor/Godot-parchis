@@ -1,0 +1,178 @@
+[
+  {
+    "faction": "crimson-voss",
+    "state": "speak_a",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Edit target: the supplied complete transparent character portrait, not a source of separate parts. Return ONE COMPLETE chest-up portrait frame with genuine alpha transparency, the exact same square canvas and the exact same character framing as the input. Only change the facial expression: Her lips part slightly in a relaxed mid-speech 'ah', with a very small natural dark mouth opening. Keep the lips' original width, brown skin, and the exact original nose-to-mouth and chin proportions. Repaint the facial anatomy as one continuous illustration with matching perspective, soft light and skin texture, not a pasted mouth or skin patch. Keep eyes OPEN with original gaze. Keep all pixels outside the central face unchanged: same pose, head position, hair, silhouette, neck, armor, clothing, hand, props, highlights and shadows. This is a matching animation frame: do not zoom, rotate, translate, recrop, change body proportions or add headroom. Clean natural face with no seams, no double lips, no rectangular skin boundaries or artifacts from layered sprites. Keep painterly realism, identity and age. Full finished character on genuine transparency; no background, text, checkerboard, extra faces, insets or sprite sheet.",
+    "reference": "assets/factions/portraits/crimson-voss/idle.png",
+    "asset": "assets/factions/portraits/crimson-voss/speak_a.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-6834c1e7-2188-42a2-a6ce-7d61ac5309dc.png"
+  },
+  {
+    "faction": "crimson-voss",
+    "state": "speak_b",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Iria Voss, warm brown skin, short silver undercut, black command armor and crimson cape. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a SMALL softly rounded mid-speech 'oh' mouth opening, NOT an exaggerated kiss or pout. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/crimson-voss/idle.png",
+    "asset": "assets/factions/portraits/crimson-voss/speak_b.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-be4d504b-0418-4e13-9a42-446901439bfe.png"
+  },
+  {
+    "faction": "crimson-voss",
+    "state": "blink",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Iria Voss, warm brown skin, short silver undercut, black command armor and crimson cape. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Close BOTH eyelids naturally for a brief blink. Keep eyebrows in their ORIGINAL position and original shape, no eyebrow shift or second eyebrow. Preserve eyelid skin texture, eye socket volume, facial tilt and original lighting. Keep lips CLOSED exactly as in the reference. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/crimson-voss/idle.png",
+    "asset": "assets/factions/portraits/crimson-voss/blink.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-1ce595f1-652d-4776-9ae1-fc81e182139f.png"
+  },
+  {
+    "faction": "crimson-voss",
+    "state": "smile",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Iria Voss, warm brown skin, short silver undercut, black command armor and crimson cape. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a subtle warm CLOSED-mouth smile, with naturally responding cheeks and corners of lips. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/crimson-voss/idle.png",
+    "asset": "assets/factions/portraits/crimson-voss/smile.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-092d6b32-3b0d-4f9b-8685-1235a1d34c11.png"
+  },
+  {
+    "faction": "viridian-sael",
+    "state": "speak_a",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Edit target: the supplied complete transparent character portrait, not a source of separate parts. Return ONE COMPLETE chest-up portrait frame with genuine alpha transparency, the exact same square canvas and the exact same character framing as the input. Only change the facial expression: Their lips part slightly in a relaxed mid-speech 'ah', with a very small natural dark mouth opening. Preserve sage skin, natural lip width and continuous branching leaf veins across the cheeks. No disconnected vein fragments. Repaint the facial anatomy as one continuous illustration with matching perspective, soft light and skin texture, not a pasted mouth or skin patch. Keep eyes OPEN with original gaze. Keep all pixels outside the central face unchanged: same pose, head position, hair, silhouette, neck, armor, clothing, hand, props, highlights and shadows. This is a matching animation frame: do not zoom, rotate, translate, recrop, change body proportions or add headroom. Clean natural face with no seams, no double lips, no rectangular skin boundaries or artifacts from layered sprites. Keep painterly realism, identity and age. Full finished character on genuine transparency; no background, text, checkerboard, extra faces, insets or sprite sheet.",
+    "reference": "assets/factions/portraits/viridian-sael/idle.png",
+    "asset": "assets/factions/portraits/viridian-sael/speak_a.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-d36d4e41-3950-4698-ad3f-57e1857aaecb.png"
+  },
+  {
+    "faction": "viridian-sael",
+    "state": "speak_b",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Sael, sage-green botanical skin with continuous fine branching veins, leaf crest and leaf ears. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a SMALL softly rounded mid-speech 'oh' mouth opening, NOT an exaggerated kiss or pout. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/viridian-sael/idle.png",
+    "asset": "assets/factions/portraits/viridian-sael/speak_b.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-c20ca170-62a8-4fe3-a600-6300c3600cde.png"
+  },
+  {
+    "faction": "viridian-sael",
+    "state": "blink",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Sael, sage-green botanical skin with continuous fine branching veins, leaf crest and leaf ears. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Close BOTH eyelids naturally for a brief blink. Keep eyebrows in their ORIGINAL position and original shape, no eyebrow shift or second eyebrow. Preserve eyelid skin texture, eye socket volume, facial tilt and original lighting. Keep lips CLOSED exactly as in the reference. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/viridian-sael/idle.png",
+    "asset": "assets/factions/portraits/viridian-sael/blink.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-053e3670-e49d-4e8d-bb5a-888226f6a777.png"
+  },
+  {
+    "faction": "viridian-sael",
+    "state": "smile",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Sael, sage-green botanical skin with continuous fine branching veins, leaf crest and leaf ears. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a subtle warm CLOSED-mouth smile, with naturally responding cheeks and corners of lips. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/viridian-sael/idle.png",
+    "asset": "assets/factions/portraits/viridian-sael/smile.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-1f53a63e-e3b3-498c-b53a-0af228239e70.png"
+  },
+  {
+    "faction": "azure-lyra",
+    "state": "speak_a",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Edit target: the supplied complete transparent character portrait, not a source of separate parts. Return ONE COMPLETE chest-up portrait frame with genuine alpha transparency, the exact same square canvas and the exact same character framing as the input. Only change the facial expression: Her lips part slightly in a relaxed mid-speech 'ah', with a very small natural dark mouth opening. Preserve porcelain skin, facial seams and existing star-map markings exactly. No added blue circuits or marks around the mouth. Repaint the facial anatomy as one continuous illustration with matching perspective, soft light and skin texture, not a pasted mouth or skin patch. Keep eyes OPEN with original gaze. Keep all pixels outside the central face unchanged: same pose, head position, hair, silhouette, neck, armor, clothing, hand, props, highlights and shadows. This is a matching animation frame: do not zoom, rotate, translate, recrop, change body proportions or add headroom. Clean natural face with no seams, no double lips, no rectangular skin boundaries or artifacts from layered sprites. Keep painterly realism, identity and age. Full finished character on genuine transparency; no background, text, checkerboard, extra faces, insets or sprite sheet.",
+    "reference": "assets/factions/portraits/azure-lyra/idle.png",
+    "asset": "assets/factions/portraits/azure-lyra/speak_a.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-b638c4ad-1c41-4681-bfe9-d43623bb8b0a.png"
+  },
+  {
+    "faction": "azure-lyra",
+    "state": "speak_b",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of LYRA-7, porcelain synthetic skin, blue eyes, delicate original graphite facial seams and original star-map markings. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a SMALL softly rounded mid-speech 'oh' mouth opening, NOT an exaggerated kiss or pout. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/azure-lyra/idle.png",
+    "asset": "assets/factions/portraits/azure-lyra/speak_b.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-2f5d66cc-f95a-4c78-a6f0-a1d6695ebd77.png"
+  },
+  {
+    "faction": "azure-lyra",
+    "state": "blink",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of LYRA-7, porcelain synthetic skin, blue eyes, delicate original graphite facial seams and original star-map markings. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Close BOTH eyelids naturally for a brief blink. Keep eyebrows in their ORIGINAL position and original shape, no eyebrow shift or second eyebrow. Preserve eyelid skin texture, eye socket volume, facial tilt and original lighting. Keep lips CLOSED exactly as in the reference. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/azure-lyra/idle.png",
+    "asset": "assets/factions/portraits/azure-lyra/blink.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-ac46d132-450e-420f-be0f-07009a3da6b0.png"
+  },
+  {
+    "faction": "azure-lyra",
+    "state": "smile",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of LYRA-7, porcelain synthetic skin, blue eyes, delicate original graphite facial seams and original star-map markings. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a subtle warm CLOSED-mouth smile, with naturally responding cheeks and corners of lips. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/azure-lyra/idle.png",
+    "asset": "assets/factions/portraits/azure-lyra/smile.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-0de71c4e-2662-4223-af2a-a92eca4a6606.png"
+  },
+  {
+    "faction": "solar-reyes",
+    "state": "speak_a",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Sol Reyes, tan skin, curly dark hair, thin moustache and natural dark stubble. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Part the lips slightly for a natural small mid-speech 'ah' opening, with subtle teeth glimpsed only if anatomically appropriate. Match original lip width, original facial tilt, moustache/stubble if present, continuous skin texture, and exact lip placement. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/solar-reyes/idle.png",
+    "asset": "assets/factions/portraits/solar-reyes/speak_a.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-5c9fadb1-d6e4-47df-bb8d-8560f214fe8f.png"
+  },
+  {
+    "faction": "solar-reyes",
+    "state": "speak_b",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Sol Reyes, tan skin, curly dark hair, thin moustache and natural dark stubble. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Form a SMALL softly rounded mid-speech 'oh' mouth opening, NOT an exaggerated kiss or pout. Match original lip width and placement, original facial tilt, moustache/stubble if present, and continuous skin texture. Eyes stay OPEN with original gaze. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/solar-reyes/idle.png",
+    "asset": "assets/factions/portraits/solar-reyes/speak_b.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-6f49f1b8-7e42-46f6-aee3-110bb954d7db.png"
+  },
+  {
+    "faction": "solar-reyes",
+    "state": "blink",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Input is the EDIT TARGET: a complete square transparent dialogue portrait of Sol Reyes, tan skin, curly dark hair, thin moustache and natural dark stubble. Return ONE COMPLETE FINISHED PORTRAIT of this same character on genuine alpha transparency. Change ONLY this expression: Close BOTH eyelids naturally for a brief blink. Keep eyebrows in their ORIGINAL position and original shape, no eyebrow shift or second eyebrow. Preserve eyelid skin texture, eye socket volume, facial tilt and original lighting. Keep lips CLOSED exactly as in the reference. No new facial markings. Paint the face as continuous natural anatomy, with no pasted feature patches or compositing edges. Keep original identity, age, nose, jaw, head pose, eye line, hair, ears, neck, hand, props, costume, ornaments, all highlights and lighting. Preserve EXACT canvas framing: same head size, hair top position, shoulders and hand positions, same body silhouette, same bottom crop. Keep pixels outside the face unchanged. No rotation, translation, zoom, recropping, extra headroom or changes to costume. This frame will alternate directly with the input in an animation, so preserve alignment very strictly. Eliminate rectangular skin borders, discoloration patches, stray skin/vein/circuit/beard fragments, double lips and duplicate facial features. Keep original premium painted realism and crisp details. No background, checkerboard, text, insets, additional characters or separate body parts. The output is a WHOLE portrait frame, not a facial overlay.",
+    "reference": "assets/factions/portraits/solar-reyes/idle.png",
+    "asset": "assets/factions/portraits/solar-reyes/blink.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-c7fc3e20-0603-4192-9acc-acf26327c9ad.png"
+  },
+  {
+    "faction": "solar-reyes",
+    "state": "smile",
+    "tool": "built-in image_gen",
+    "mode": "precise-object-edit",
+    "transparent_background": true,
+    "prompt": "Use case: precise-object-edit. Edit target: the supplied complete transparent character portrait, not a source of separate parts. Return ONE COMPLETE chest-up portrait frame with genuine alpha transparency, the exact same square canvas and the exact same character framing as the input. Only change the facial expression: He has a subtle warm closed-mouth smile. The cheeks and nasolabial folds respond naturally. Preserve the same thin moustache and stubble, with hairs naturally following his lips. No jewelry, yellow/gold marks, patch edges or beard discontinuities on the cheeks. Repaint the facial anatomy as one continuous illustration with matching perspective, soft light and skin texture, not a pasted mouth or skin patch. Keep eyes OPEN with original gaze. Keep all pixels outside the central face unchanged: same pose, head position, hair, silhouette, neck, armor, clothing, hand, props, highlights and shadows. This is a matching animation frame: do not zoom, rotate, translate, recrop, change body proportions or add headroom. Clean natural face with no seams, no double lips, no rectangular skin boundaries or artifacts from layered sprites. Keep painterly realism, identity and age. Full finished character on genuine transparency; no background, text, checkerboard, extra faces, insets or sprite sheet.",
+    "reference": "assets/factions/portraits/solar-reyes/idle.png",
+    "asset": "assets/factions/portraits/solar-reyes/smile.png",
+    "generated_source": "/home/user/.codex/generated_images/01a141ba-e8fc-7141-a6cc-1f93e9da3809/exec-c2c3ab93-87fc-430f-b1a9-dc6889d230df.png"
+  }
+]

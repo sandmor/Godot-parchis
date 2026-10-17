@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PortraitSequence" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://PortraitSequence.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/factions/portraits/azure-lyra/idle.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/factions/portraits/azure-lyra/speak_a.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/factions/portraits/azure-lyra/speak_b.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/factions/portraits/azure-lyra/blink.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/factions/portraits/azure-lyra/smile.png" id="6"]
+
+[resource]
+script = ExtResource("1")
+frames = {
+"idle": ExtResource("2"),
+"speak_a": ExtResource("3"),
+"speak_b": ExtResource("4"),
+"blink": ExtResource("5"),
+"smile": ExtResource("6")
+}
