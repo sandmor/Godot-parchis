@@ -62,8 +62,9 @@ size_flags_horizontal = 3
 max_length = 24
 
 [node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow0" unique_id=2038659097]
-custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = true
 
 [node name="PlayerRow1" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=1918744010]
 layout_mode = 2
@@ -81,8 +82,9 @@ size_flags_horizontal = 3
 max_length = 24
 
 [node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow1" unique_id=1767170413]
-custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = true
 
 [node name="PlayerRow2" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=992072127]
 layout_mode = 2
@@ -100,8 +102,9 @@ size_flags_horizontal = 3
 max_length = 24
 
 [node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow2" unique_id=1909087362]
-custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = true
 
 [node name="PlayerRow3" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=872169826]
 layout_mode = 2
@@ -119,8 +122,9 @@ size_flags_horizontal = 3
 max_length = 24
 
 [node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow3" unique_id=1134786998]
-custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = true
 
 [node name="PreviewPanel" type="PanelContainer" parent="Center/Panel/Content" unique_id=803054876]
 layout_mode = 2
@@ -147,8 +151,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 
 [node name="FactionDescription" type="Label" parent="Center/Panel/Content/PreviewPanel/PreviewRow/PreviewText" unique_id=516070510]
-custom_minimum_size = Vector2(410, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.6313726, 0.7411765, 0.8, 1)
 autowrap_mode = 3
@@ -159,10 +163,13 @@ text = "LOBBY_FAST_DICE"
 
 [node name="SetupError" type="Label" parent="Center/Panel/Content" unique_id=1810243359]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(1, 0.5176471, 0.5764706, 1)
+autowrap_mode = 3
 
 [node name="StartMatchButton" type="Button" parent="Center/Panel/Content" unique_id=973016176]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "LOBBY_START_MATCH"

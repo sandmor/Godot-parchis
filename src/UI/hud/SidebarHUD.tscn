@@ -61,8 +61,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 17
 
 [node name="FactionMessage" type="Label" parent="Scroll/Content/FactionContact/GuidanceBox" unique_id=3669526]
-custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Click to show the full message"
 mouse_filter = 0
 theme_override_font_sizes/font_size = 15
@@ -71,52 +71,60 @@ autowrap_mode = 3
 
 [node name="GuideDismiss" type="Button" parent="Scroll/Content/FactionContact/GuidanceBox" unique_id=1263878485]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 12
 text = "Hide guidance"
 
 [node name="Roster" type="VBoxContainer" parent="Scroll/Content" unique_id=395237129]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 9
 
 [node name="@HSeparator@64" type="HSeparator" parent="Scroll/Content" unique_id=1967673461]
 layout_mode = 2
 
 [node name="TurnTitle" type="Label" parent="Scroll/Content" unique_id=2140080770]
-custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 23
 autowrap_mode = 3
 
 [node name="PhaseBadge" type="Label" parent="Scroll/Content" unique_id=16876421]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 theme_override_colors/font_color = Color(1, 0.8117647, 0.34509805, 1)
 
 [node name="DiceRow" type="HBoxContainer" parent="Scroll/Content" unique_id=1978358989]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Die0" type="Label" parent="Scroll/Content/DiceRow" unique_id=1460969292]
-custom_minimum_size = Vector2(112, 58)
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
+size_flags_horizontal = 3
 horizontal_alignment = 1
 script = ExtResource("2_xfkmj")
 
 [node name="Die1" type="Label" parent="Scroll/Content/DiceRow" unique_id=1233421849]
-custom_minimum_size = Vector2(112, 58)
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
+size_flags_horizontal = 3
 horizontal_alignment = 1
 script = ExtResource("2_xfkmj")
 
 [node name="Status" type="Label" parent="Scroll/Content" unique_id=1901301071]
-custom_minimum_size = Vector2(240, 32)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 17
 theme_override_colors/font_color = Color(0.7607843, 0.8509804, 0.89411765, 1)
 autowrap_mode = 3
 
 [node name="Actions" type="HBoxContainer" parent="Scroll/Content" unique_id=706660339]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="RollDice" type="Button" parent="Scroll/Content/Actions" unique_id=101805703]
 layout_mode = 2
@@ -126,6 +134,7 @@ text = "UI_ROLL_DICE"
 
 [node name="LobbyButton" type="Button" parent="Scroll/Content/Actions" unique_id=174944896]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "UI_TOOLTIP_SETUP"
 mouse_default_cursor_shape = 2
 text = "UI_SETUP"
@@ -133,10 +142,12 @@ text = "UI_SETUP"
 [node name="PawnButtons" type="GridContainer" parent="Scroll/Content" unique_id=725575877]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Choices" type="VBoxContainer" parent="Scroll/Content" unique_id=1749501326]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
 [node name="@HSeparator@65" type="HSeparator" parent="Scroll/Content" unique_id=1076212948]
@@ -144,33 +155,39 @@ layout_mode = 2
 
 [node name="CameraRow" type="HBoxContainer" parent="Scroll/Content" unique_id=186371462]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="OverviewButton" type="Button" parent="Scroll/Content/CameraRow" unique_id=969512852]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "UI_OVERVIEW"
 
 [node name="FocusButton" type="Button" parent="Scroll/Content/CameraRow" unique_id=1933271569]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "UI_FOCUS"
 
 [node name="ViewToggleButton" type="Button" parent="Scroll/Content/CameraRow" unique_id=1738279157]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "UI_VIEW_TOGGLE"
 
 [node name="Settings" type="MenuButton" parent="Scroll/Content" unique_id=1008543612]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "UI_OPTIONS"
 
 [node name="HistoryPanel" type="PanelContainer" parent="Scroll/Content" unique_id=1065872727]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HistoryLabel" type="Label" parent="Scroll/Content/HistoryPanel" unique_id=341480205]
-custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 13
 theme_override_colors/font_color = Color(0.5568628, 0.6862745, 0.7529412, 1)
 autowrap_mode = 3

@@ -28,29 +28,36 @@ theme_override_constants/separation = 9
 
 [node name="Title" type="Label" parent="Center/Panel/Content" unique_id=805830835]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 theme_override_colors/font_color = Color(0.41960785, 0.8784314, 0.9254902, 1)
 text = "SOUND & PORTRAITS"
 
 [node name="EffectsLabel" type="Label" parent="Center/Panel/Content" unique_id=1496767692]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 17
 text = "Game effects"
+autowrap_mode = 3
 
 [node name="EffectsVolume" type="HSlider" parent="Center/Panel/Content" unique_id=1545928420]
-custom_minimum_size = Vector2(450, 32)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
 [node name="DialogueLabel" type="Label" parent="Center/Panel/Content" unique_id=960300801]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 17
 text = "Dialogue chimes & text ticks"
+autowrap_mode = 3
 
 [node name="DialogueVolume" type="HSlider" parent="Center/Panel/Content" unique_id=624529649]
-custom_minimum_size = Vector2(450, 32)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
@@ -64,10 +71,12 @@ text = "Animate dialogue portraits"
 
 [node name="PreviewButton" type="Button" parent="Center/Panel/Content" unique_id=1517465948]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Preview effects"
 
 [node name="DoneButton" type="Button" parent="Center/Panel/Content" unique_id=956893375]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Done"

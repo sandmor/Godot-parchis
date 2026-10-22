@@ -700,6 +700,8 @@ func _rebuild_choices() -> void:
 		var text := "Release to " + destination if move.kind == "release" else "%s: +%d to %s" % ["Both" if move.mask == 3 else "D%d" % (1 if move.mask == 1 else 2), move.steps, destination]
 		var button := _button(choices, text, _execute_move.bind(move))
 		button.add_theme_color_override("font_color", Color("b9ff75"))
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 func _destination_name(progress: int) -> String:
 	if progress == Rules.GOAL:
