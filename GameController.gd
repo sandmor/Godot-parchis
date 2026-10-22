@@ -88,6 +88,7 @@ var _last_game_phase := "lobby"
 @export_range(-1, 3) var local_faction_id: int = -1
 
 func _ready() -> void:
+	Lore.Manager._ensure_translations()
 	board = get_node("Board")
 	camera = get_node("Camera3D")
 	var old_hud := get_node_or_null("HUD")
@@ -230,11 +231,11 @@ func _build_ui() -> void:
 	status.custom_minimum_size = Vector2(240, 32)
 	actions = HBoxContainer.new()
 	box.add_child(actions)
-	roll_button = _button(actions, "Roll dice", _roll_clicked)
+	roll_button = _button(actions, tr("UI_ROLL_DICE"), _roll_clicked)
 	roll_button.name = "RollDice"
 	roll_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	lobby_button = _button(actions, "Setup", show_lobby)
-	lobby_button.tooltip_text = "Return to crew setup"
+	lobby_button = _button(actions, tr("UI_SETUP"), show_lobby)
+	lobby_button.tooltip_text = tr("UI_TOOLTIP_SETUP")
 
 	pawn_buttons = GridContainer.new()
 	pawn_buttons.columns = 1
@@ -247,20 +248,20 @@ func _build_ui() -> void:
 	box.add_child(HSeparator.new())
 	var camera_row := HBoxContainer.new()
 	box.add_child(camera_row)
-	_button(camera_row, "Overview", func(): camera.overview())
-	focus_button = _button(camera_row, "Focus", _focus_selected)
-	_button(camera_row, "3D / Top", func(): camera.toggle_angle())
+	_button(camera_row, tr("UI_OVERVIEW"), func(): camera.overview())
+	focus_button = _button(camera_row, tr("UI_FOCUS"), _focus_selected)
+	_button(camera_row, tr("UI_VIEW_TOGGLE"), func(): camera.toggle_angle())
 	settings = MenuButton.new()
-	settings.text = "Options"
+	settings.text = tr("UI_OPTIONS")
 	box.add_child(settings)
 	var menu := settings.get_popup()
-	menu.add_item("Faction prologue", 0)
-	menu.add_item("Restart field guidance", 1)
-	menu.add_check_item("Move list & crew details", 2)
-	menu.add_check_item("Space coordinates", 3)
-	menu.add_item("Camera controls", 4)
-	menu.add_check_item("Mute sound", 5)
-	menu.add_item("Sound & portrait settings", 6)
+	menu.add_item(tr("MENU_PROLOGUE"), 0)
+	menu.add_item(tr("MENU_RESTART_GUIDANCE"), 1)
+	menu.add_check_item(tr("MENU_MOVE_LIST"), 2)
+	menu.add_check_item(tr("MENU_COORDINATES"), 3)
+	menu.add_item(tr("MENU_CAMERA_CONTROLS"), 4)
+	menu.add_check_item(tr("MENU_MUTE_SOUND"), 5)
+	menu.add_item(tr("MENU_AUDIO_SETTINGS"), 6)
 	menu.set_item_checked(menu.get_item_index(5), not audio.enabled)
 	menu.id_pressed.connect(_menu_action)
 	var history_panel := _panel(box)
@@ -370,11 +371,11 @@ func _center_box(overlay: Control, width: float) -> VBoxContainer:
 func _build_setup() -> void:
 	setup_overlay = _overlay("Lobby")
 	var box := _center_box(setup_overlay, 650)
-	_label(box, "THE LOOM  /  ASSEMBLE YOUR CREW", 28, Color("69e4eb"))
-	_label(box, "A fractured star gate. Four stranded crew. Bring everyone home.\n2–4 commanders · shared screen", 14)
+	_label(box, tr("LOBBY_TITLE"), 28, Color("69e4eb"))
+	_label(box, tr("LOBBY_SUBTITLE"), 14)
 	player_count = OptionButton.new()
 	for count in [2, 3, 4]:
-		player_count.add_item("%d players" % count, count)
+		player_count.add_item(tr("LOBBY_PLAYERS_COUNT").replace("{count}", str(count)), count)
 	box.add_child(player_count)
 	player_count.item_selected.connect(_update_setup.unbind(1))
 	for index in range(4):
@@ -384,8 +385,8 @@ func _build_setup() -> void:
 		player_rows.append(row)
 		_label(row, "%02d" % (index + 1), 16, Color("6b9cae"))
 		var name_field := LineEdit.new()
-		name_field.placeholder_text = "Player name"
-		name_field.text = "Player %d" % (index + 1)
+		name_field.placeholder_text = tr("LOBBY_PLAYER_NAME_PLACEHOLDER")
+		name_field.text = tr("LOBBY_PLAYER_DEFAULT").replace("{n}", str(index + 1))
 		name_field.max_length = 24
 		name_field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(name_field)
@@ -414,10 +415,10 @@ func _build_setup() -> void:
 	lobby_description.custom_minimum_size.x = 410
 	_preview_lobby_faction(0)
 	fast_dice = CheckBox.new()
-	fast_dice.text = "Quick dice animations"
+	fast_dice.text = tr("LOBBY_FAST_DICE")
 	box.add_child(fast_dice)
 	setup_error = _label(box, "", 14, Color("ff8493"))
-	_button(box, "Start match · roll for first turn", _start_match)
+	_button(box, tr("LOBBY_START_MATCH"), _start_match)
 	_update_setup()
 
 func _update_setup() -> void:
@@ -514,7 +515,7 @@ func _build_dice_overlay() -> void:
 	dice_result.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	dice_stage.result_ready.connect(_dice_settled)
 	dice_stage.animation_skipped.connect(_dice_animation_skipped)
-	var skip_button := _button(box, "Skip animation", func(): dice_stage.skip())
+	var skip_button := _button(box, tr("UI_SKIP_ANIMATION"), func(): dice_stage.skip())
 	skip_button.name = "SkipDiceAnimation"
 	dice_overlay.hide()
 
@@ -536,7 +537,7 @@ func _roll_clicked() -> void:
 	_refresh()
 	var player: Dictionary = game.players[game.current_player]
 	dice_caption.text = "%s / %s" % [player.name, "STARTING ORDER" if game.phase == "opening" else "DICE REACTOR"]
-	dice_result.text = "Rolling…"
+	dice_result.text = tr("UI_ROLLING")
 	dice_overlay.show()
 	# Numeric result appears when the cubes have settled, not before the throw.
 	var values: Array[int] = await dice_stage.play(board.player_colors[int(player.color)], fast_dice.button_pressed, _rng.randi())
@@ -586,7 +587,7 @@ func _refresh() -> void:
 	turn_title.add_theme_color_override("font_color", color)
 	_update_instruction()
 	roll_button.disabled = _busy or _briefing_open() or game.phase not in ["opening", "await_roll"]
-	roll_button.text = "Roll for first turn" if game.phase == "opening" else ("Roll for doubles" if _all_jailed() else "Roll dice")
+	roll_button.text = tr("UI_ROLL_FIRST") if game.phase == "opening" else (tr("UI_ROLL_DOUBLES") if _all_jailed() else tr("UI_ROLL_DICE"))
 	lobby_button.disabled = _busy or _briefing_open()
 	for index in range(2):
 		dice_labels[index].display(int(game.last_roll[index]) if game.last_roll.size() == 2 else 0, game.dice_remaining[index] or game.phase == "opening", color)

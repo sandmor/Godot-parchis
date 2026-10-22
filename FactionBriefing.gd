@@ -85,7 +85,7 @@ func _ready() -> void:
 	dialogue.add_theme_color_override("default_color", Color("dcebf4"))
 	dialogue.scroll_active = true
 	dialogue_box.add_child(dialogue)
-	dialogue.tooltip_text = "Click to show the full transmission"
+	dialogue.tooltip_text = tr("UI_TOOLTIP_TRANSMISSION")
 	dialogue.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			reveal.complete()
@@ -98,14 +98,14 @@ func _ready() -> void:
 	var footer := HBoxContainer.new()
 	footer.add_theme_constant_override("separation", 12)
 	box.add_child(footer)
-	var skip := _button(footer, "Skip prologue", finish)
+	var skip := _button(footer, tr("UI_SKIP_PROLOGUE"), finish)
 	skip.name = "SkipBriefing"
 	var spacer := Control.new()
 	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	footer.add_child(spacer)
-	back_button = _button(footer, "Back", previous_page)
+	back_button = _button(footer, tr("UI_BACK"), previous_page)
 	back_button.name = "PreviousPage"
-	next_button = _button(footer, "Continue", next_page)
+	next_button = _button(footer, tr("UI_CONTINUE"), next_page)
 	next_button.name = "NextPage"
 	hide()
 
@@ -116,8 +116,10 @@ func present(viewer_faction: int, player_name: String, opening_player_name: Stri
 	var faction := Lore.profile(faction_id)
 	_accent = faction.color
 	emblem.texture = load(str(faction.emblem))
-	pages = [{"title": "THE LOOM IS WAKING", "text": "%s, the old star gate has begun to fracture. Four of our crew remain stranded in stasis. Guide them along the orbital causeways and bring them through the Loom.\n\n%s\n\n%s" % [player_name, Lore.expedition(faction_id), "You have the first turn. I will guide your first actions in the arena." if opens_match else "%s has the first turn. I will guide you in the arena." % opening_player_name]}]
-	faction_name.text = "%s / INCOMING TRANSMISSION" % str(faction.name).to_upper()
+	var turn_guide: String = tr("PROLOGUE_FIRST_TURN_SELF") if opens_match else tr("PROLOGUE_FIRST_TURN_OTHER").replace("{first}", opening_player_name)
+	var intro_text := tr("PROLOGUE_INTRO_BODY").replace("{player}", player_name).replace("{expedition}", Lore.expedition(faction_id)).replace("{turn_guide}", turn_guide)
+	pages = [{"title": tr("PROLOGUE_TITLE"), "text": intro_text}]
+	faction_name.text = tr("PROLOGUE_HEADER").replace("{name}", str(faction.name).to_upper())
 	faction_name.add_theme_color_override("font_color", _accent)
 	speaker.text = "%s %s" % [str(faction.title).capitalize(), faction.character]
 	speaker.add_theme_color_override("font_color", _accent)
@@ -139,10 +141,10 @@ func _update_page() -> void:
 	page_title.text = pages[page_index].title
 	dialogue.text = pages[page_index].text
 	dialogue.scroll_to_line(0)
-	progress.text = "PROLOGUE"
+	progress.text = tr("PROLOGUE_BADGE")
 	back_button.hide()
 	back_button.disabled = page_index == 0
-	next_button.text = ("Begin turn" if _opens_match else "Enter arena") if page_index == pages.size() - 1 else "Continue"
+	next_button.text = (tr("UI_BEGIN_TURN") if _opens_match else tr("UI_ENTER_ARENA")) if page_index == pages.size() - 1 else tr("UI_CONTINUE")
 
 func next_page() -> void:
 	if not visible:

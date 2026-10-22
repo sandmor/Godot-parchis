@@ -39,7 +39,7 @@ var _materials: Dictionary = {}
 var _hologram: Node3D
 var _time := 0.0
 var coordinates_visible := false
-const PieceScene := preload("res://pieces/Piece.tscn")
+const PieceScene := preload("res://src/pieces/Piece.tscn")
 
 func _ready() -> void:
 	generate_board()

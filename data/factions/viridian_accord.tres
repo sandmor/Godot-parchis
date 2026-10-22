@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="FactionData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/factions/FactionData.gd" id="1_fact"]
+
+[resource]
+script = ExtResource("1_fact")
+id = 1
+name_key = "FACTION_1_NAME"
+short_name_key = "FACTION_1_SHORT_NAME"
+character = "Sael"
+title_key = "FACTION_1_TITLE"
+color = Color(0.282353, 0.905882, 0.627451, 1)
+motto_key = "FACTION_1_MOTTO"
+description_key = "FACTION_1_DESC"
+portrait = "res://assets/factions/portraits/viridian-sael.tres"
+emblem = "res://assets/factions/emblems/viridian-sael.svg"
+welcome_key = "FACTION_1_WELCOME"
+welcome_observer_key = "FACTION_1_WELCOME_OBSERVER"
+jail_key = "FACTION_1_JAIL"
+movement_key = "FACTION_1_MOVEMENT"
+capture_key = "FACTION_1_CAPTURE"
+finish_key = "FACTION_1_FINISH"
+expedition_key = "FACTION_1_EXPEDITION"
+

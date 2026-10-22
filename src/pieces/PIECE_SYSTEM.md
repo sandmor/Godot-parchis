@@ -9,11 +9,11 @@ Documentación técnica sobre la arquitectura, funcionamiento, cinemática y uso
 El sistema implementa el principio de **Composición sobre Herencia** y una estricta separación de responsabilidades entre **Lógica/Física** y **Presentación/Visual**:
 
 ```
-                  ┌───────────────────────────────────────────────┐
-                  │            MainGame / GameController          │
-                  └───────────────────────┬───────────────────────┘
-                                          │ Órdenes de juego (await move_steps_to, etc.)
-                                          ▼
+				  ┌───────────────────────────────────────────────┐
+				  │            MainGame / GameController          │
+				  └───────────────────────┬───────────────────────┘
+										  │ Órdenes de juego (await move_steps_to, etc.)
+										  ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │  Piece.tscn (Area3D) - Entidad Física y Lógica (Piece.gd)                       │
 │  - Identidad: team, slot, piece_color                                           │
@@ -41,10 +41,10 @@ Si en el futuro se sustituyen las mallas procedurales por modelos 3D exportados 
 El archivo [`Piece.tscn`](./Piece.tscn) contiene los siguientes nodos:
 
 ```text
-Piece (Area3D - Script: pieces/Piece.gd)
+Piece (Area3D - Script: src/pieces/Piece.gd)
 ├── CollisionShape3D (CylinderShape3D: radio 0.55m, altura 1.6m)
-└── Visual (Node3D - Script: pieces/PieceVisual.gd)
-    └── AnimatedRig (Generado proceduralmente en tiempo de ejecución)
+└── Visual (Node3D - Script: src/pieces/PieceVisual.gd)
+	└── AnimatedRig (Generado proceduralmente en tiempo de ejecución)
 ```
 
 1. **`Piece` (`Area3D`)**: Raíz de la escena. Representa la posición lógica y física de la ficha en el tablero 3D.
