@@ -1,0 +1,168 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/UI/components/AnimatedPortrait.gd" id="1_onk4h"]
+
+[node name="Lobby" type="Control" unique_id=523692216]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=1116546621]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.004, 0.009, 0.022, 0.8)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1750517759]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=718433826]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel" unique_id=1477718491]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="LobbyTitle" type="Label" parent="Center/Panel/Content" unique_id=22927410]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.4117647, 0.89411765, 0.92156863, 1)
+text = "LOBBY_TITLE"
+
+[node name="LobbySubtitle" type="Label" parent="Center/Panel/Content" unique_id=1997960991]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "LOBBY_SUBTITLE"
+
+[node name="PlayerCount" type="OptionButton" parent="Center/Panel/Content" unique_id=412256760]
+layout_mode = 2
+
+[node name="PlayerRows" type="VBoxContainer" parent="Center/Panel/Content" unique_id=890319739]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="PlayerRow0" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=1453938421]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NumberLabel" type="Label" parent="Center/Panel/Content/PlayerRows/PlayerRow0" unique_id=558208693]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.41960785, 0.6117647, 0.68235296, 1)
+text = "01"
+
+[node name="NameInput" type="LineEdit" parent="Center/Panel/Content/PlayerRows/PlayerRow0" unique_id=686753422]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 24
+
+[node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow0" unique_id=2038659097]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+
+[node name="PlayerRow1" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=1918744010]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NumberLabel" type="Label" parent="Center/Panel/Content/PlayerRows/PlayerRow1" unique_id=394366879]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.41960785, 0.6117647, 0.68235296, 1)
+text = "02"
+
+[node name="NameInput" type="LineEdit" parent="Center/Panel/Content/PlayerRows/PlayerRow1" unique_id=1987001630]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 24
+
+[node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow1" unique_id=1767170413]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+
+[node name="PlayerRow2" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=992072127]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NumberLabel" type="Label" parent="Center/Panel/Content/PlayerRows/PlayerRow2" unique_id=346504463]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.41960785, 0.6117647, 0.68235296, 1)
+text = "03"
+
+[node name="NameInput" type="LineEdit" parent="Center/Panel/Content/PlayerRows/PlayerRow2" unique_id=847564287]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 24
+
+[node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow2" unique_id=1909087362]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+
+[node name="PlayerRow3" type="HBoxContainer" parent="Center/Panel/Content/PlayerRows" unique_id=872169826]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NumberLabel" type="Label" parent="Center/Panel/Content/PlayerRows/PlayerRow3" unique_id=221149132]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.41960785, 0.6117647, 0.68235296, 1)
+text = "04"
+
+[node name="NameInput" type="LineEdit" parent="Center/Panel/Content/PlayerRows/PlayerRow3" unique_id=374919350]
+layout_mode = 2
+size_flags_horizontal = 3
+max_length = 24
+
+[node name="ColorInput" type="OptionButton" parent="Center/Panel/Content/PlayerRows/PlayerRow3" unique_id=1134786998]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+
+[node name="PreviewPanel" type="PanelContainer" parent="Center/Panel/Content" unique_id=803054876]
+layout_mode = 2
+
+[node name="PreviewRow" type="HBoxContainer" parent="Center/Panel/Content/PreviewPanel" unique_id=1374564504]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="LobbyPortrait" type="Control" parent="Center/Panel/Content/PreviewPanel/PreviewRow" unique_id=932127423]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+script = ExtResource("1_onk4h")
+
+[node name="PreviewText" type="VBoxContainer" parent="Center/Panel/Content/PreviewPanel/PreviewRow" unique_id=397705135]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FactionName" type="Label" parent="Center/Panel/Content/PreviewPanel/PreviewRow/PreviewText" unique_id=833131640]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="CharacterName" type="Label" parent="Center/Panel/Content/PreviewPanel/PreviewRow/PreviewText" unique_id=2121761858]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="FactionDescription" type="Label" parent="Center/Panel/Content/PreviewPanel/PreviewRow/PreviewText" unique_id=516070510]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.6313726, 0.7411765, 0.8, 1)
+autowrap_mode = 3
+
+[node name="FastDice" type="CheckBox" parent="Center/Panel/Content" unique_id=162756986]
+layout_mode = 2
+text = "LOBBY_FAST_DICE"
+
+[node name="SetupError" type="Label" parent="Center/Panel/Content" unique_id=1810243359]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.5176471, 0.5764706, 1)
+
+[node name="StartMatchButton" type="Button" parent="Center/Panel/Content" unique_id=973016176]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "LOBBY_START_MATCH"

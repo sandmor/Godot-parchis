@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/UI/components/AnimatedPortrait.gd" id="1_qi6f1"]
+
+[node name="Victory" type="Control" unique_id=544708672]
+layout_mode = 3
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=537080120]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.004, 0.009, 0.022, 0.8)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1152757868]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=697969499]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel" unique_id=343646459]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="VictoryPortrait" type="Control" parent="Center/Panel/Content" unique_id=1284063676]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+script = ExtResource("1_qi6f1")
+
+[node name="TitleLabel" type="Label" parent="Center/Panel/Content" unique_id=299172965]
+layout_mode = 2
+theme_override_font_sizes/font_size = 29
+text = "THE WAY HOME"
+
+[node name="WinnerLabel" type="Label" parent="Center/Panel/Content" unique_id=342709226]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+
+[node name="SubtitleLabel" type="Label" parent="Center/Panel/Content" unique_id=943220566]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "All four crew have crossed the Loom. Their journey lives on."
+
+[node name="RematchButton" type="Button" parent="Center/Panel/Content" unique_id=1472610517]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Play again · return to lobby"

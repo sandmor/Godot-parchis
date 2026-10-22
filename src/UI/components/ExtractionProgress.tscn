@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/UI/components/ExtractionProgress.gd" id="1_pbgo1"]
+
+[node name="ExtractionProgress" type="HBoxContainer" unique_id=1291075970]
+theme_override_constants/separation = 6
+script = ExtResource("1_pbgo1")
+
+[node name="Slot0" type="Panel" parent="." unique_id=1390097240]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Slot1" type="Panel" parent="." unique_id=1301524103]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Slot2" type="Panel" parent="." unique_id=1800646340]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Slot3" type="Panel" parent="." unique_id=1724323531]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="CountLabel" type="Label" parent="." unique_id=227715914]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12

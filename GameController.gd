@@ -1,11 +1,18 @@
 extends Node3D
 ## Local 2–4 player game. Rules have no dependency on the presentation.
 const Lore := preload("res://Factions.gd")
-const Briefing := preload("res://FactionBriefing.gd")
-const Overlay := preload("res://MoveOverlay.gd")
+const Briefing := preload("res://src/UI/overlays/FactionBriefing.gd")
+const Overlay := preload("res://src/UI/components/MoveOverlay.gd")
 const SIDEBAR_WIDTH := 288.0
 const Rules := preload("res://ParquesRules.gd")
 const DiceScene := preload("res://DiceThrow.tscn")
+const ExtractionProgressScene := preload("res://src/UI/components/ExtractionProgress.tscn")
+const SidebarHUDScene := preload("res://src/UI/hud/SidebarHUD.tscn")
+const LobbyOverlayScene := preload("res://src/UI/overlays/LobbyOverlay.tscn")
+const DiceOverlayScene := preload("res://src/UI/overlays/DiceOverlay.tscn")
+const SoundSettingsOverlayScene := preload("res://src/UI/overlays/SoundSettingsOverlay.tscn")
+const VictoryOverlayScene := preload("res://src/UI/overlays/VictoryOverlay.tscn")
+const CyberTheme := preload("res://src/UI/theme/cyber_theme.tres")
 const DEFAULT_COLORS := [0, 2, 1, 3]
 var game := Rules.new()
 const Guide := preload("res://FieldGuide.gd")
@@ -106,7 +113,7 @@ func _ready() -> void:
 	audio = preload("res://ArenaAudio.gd").new()
 	audio.remember_preferences = remember_audio_settings
 	add_child(audio)
-	comms_reveal = preload("res://DialogueReveal.gd").new()
+	comms_reveal = preload("res://src/UI/components/DialogueReveal.gd").new()
 	add_child(comms_reveal)
 	comms_reveal.tick.connect(func(): audio.play("text", maxi(0, _host_faction)))
 	_build_backdrop()
@@ -150,17 +157,7 @@ func _build_ui() -> void:
 	layer.add_child(ui)
 	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	ui.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var theme := Theme.new()
-	theme.default_font_size = 17
-	for kind in ["Button", "OptionButton", "LineEdit"]:
-		theme.set_stylebox("normal", kind, _style(Color("152b40"), Color("356078")))
-		theme.set_stylebox("hover", kind, _style(Color("23435b"), Color("45ddeb")))
-		theme.set_stylebox("focus", kind, _style(Color(0.1, 0.25, 0.35, 0.5), Color("7df2ff")))
-		theme.set_stylebox("pressed", kind, _style(Color("2c5b6d"), Color("82f4ff")))
-		theme.set_stylebox("disabled", kind, _style(Color("101e2c"), Color("243744")))
-		theme.set_color("font_color", kind, Color("e6f4ff"))
-		theme.set_color("font_disabled_color", kind, Color("587084"))
-	ui.theme = theme
+	ui.theme = CyberTheme
 	move_overlay = Overlay.new()
 	move_overlay.name = "BoardTargets"
 	ui.add_child(move_overlay)
@@ -168,92 +165,52 @@ func _build_ui() -> void:
 	move_overlay.camera = camera
 	move_overlay.bounds = get_play_rect()
 	move_overlay.picked.connect(_pin_picked)
-	var side := _panel(ui)
+
+	var side := SidebarHUDScene.instantiate() as PanelContainer
 	command_dock = side
 	side.name = "Sidebar"
 	side.add_theme_stylebox_override("panel", _style(Color(.018, .035, .05, .9), Color(.16, .29, .34, .5)))
-	side.anchor_left = 1
-	side.anchor_right = 1
-	side.anchor_bottom = 1
-	side.offset_left = -SIDEBAR_WIDTH - 16
-	side.offset_right = -16
-	side.offset_top = 16
-	side.offset_bottom = -42
-	var scroll := ScrollContainer.new()
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	side.add_child(scroll)
-	var box := _vbox(scroll)
-	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_label(box, "T H E  L O O M", 26)
-	_label(box, "PARQUÉS  /  ORBITAL EXODUS", 11, Color("62bfc9"))
-	var faction_panel := _panel(box)
-	faction_panel.name = "FactionContact"
-	faction_card = faction_panel
-	var contact_row := HBoxContainer.new()
-	contact_row.add_theme_constant_override("separation", 10)
-	var guidance_box := _vbox(faction_panel)
-	guidance_box.add_child(contact_row)
-	faction_portrait = preload("res://AnimatedPortrait.gd").new()
-	faction_portrait.custom_minimum_size = Vector2(88, 100)
-	contact_row.add_child(faction_portrait)
-	var contact_text := _vbox(contact_row)
-	contact_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	faction_heading = _label(contact_text, "", 14)
-	faction_speaker = _label(contact_text, "", 17)
-	faction_message = _label(guidance_box, "", 15, Color("c9dce7"))
-	faction_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	faction_message.custom_minimum_size.x = 230
-	faction_message.mouse_filter = Control.MOUSE_FILTER_STOP
-	faction_message.tooltip_text = "Click to show the full message"
+	ui.add_child(side)
+
+	faction_card = side.find_child("FactionContact", true, false) as PanelContainer
+	faction_portrait = side.find_child("FactionPortrait", true, false) as Control
+	faction_heading = side.find_child("FactionHeading", true, false) as Label
+	faction_speaker = side.find_child("FactionSpeaker", true, false) as Label
+	faction_message = side.find_child("FactionMessage", true, false) as Label
 	faction_message.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			comms_reveal.complete()
 	)
-	guide_dismiss = _button(guidance_box, "Hide guidance", _dismiss_guidance)
-	guide_dismiss.add_theme_font_size_override("font_size", 12)
+	guide_dismiss = side.find_child("GuideDismiss", true, false) as Button
+	guide_dismiss.pressed.connect(_dismiss_guidance)
 	faction_card.hide()
-	roster = _vbox(box)
-	box.add_child(HSeparator.new())
-	turn_title = _label(box, "", 23)
-	turn_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	turn_title.custom_minimum_size.x = 240
-	phase_badge = _label(box, "", 15, Color("ffcf58"))
-	var dice_row := HBoxContainer.new()
-	box.add_child(dice_row)
-	for index in range(2):
-		var die_label := preload("res://ReactorDie.gd").new()
-		dice_row.add_child(die_label)
-		die_label.custom_minimum_size = Vector2(112, 58)
-		die_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		dice_labels.append(die_label)
-	status = _label(box, "", 17, Color("c2d9e4"))
-	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	status.custom_minimum_size = Vector2(240, 32)
-	actions = HBoxContainer.new()
-	box.add_child(actions)
-	roll_button = _button(actions, tr("UI_ROLL_DICE"), _roll_clicked)
-	roll_button.name = "RollDice"
-	roll_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	lobby_button = _button(actions, tr("UI_SETUP"), show_lobby)
-	lobby_button.tooltip_text = tr("UI_TOOLTIP_SETUP")
 
-	pawn_buttons = GridContainer.new()
-	pawn_buttons.columns = 1
-	box.add_child(pawn_buttons)
-	pawn_buttons.hide()
-	choices = VBoxContainer.new()
-	choices.add_theme_constant_override("separation", 6)
-	box.add_child(choices)
-	choices.hide()
-	box.add_child(HSeparator.new())
-	var camera_row := HBoxContainer.new()
-	box.add_child(camera_row)
-	_button(camera_row, tr("UI_OVERVIEW"), func(): camera.overview())
-	focus_button = _button(camera_row, tr("UI_FOCUS"), _focus_selected)
-	_button(camera_row, tr("UI_VIEW_TOGGLE"), func(): camera.toggle_angle())
-	settings = MenuButton.new()
-	settings.text = tr("UI_OPTIONS")
-	box.add_child(settings)
+	roster = side.find_child("Roster", true, false) as VBoxContainer
+	turn_title = side.find_child("TurnTitle", true, false) as Label
+	phase_badge = side.find_child("PhaseBadge", true, false) as Label
+
+	dice_labels.clear()
+	dice_labels.append(side.find_child("Die0", true, false) as Label)
+	dice_labels.append(side.find_child("Die1", true, false) as Label)
+
+	status = side.find_child("Status", true, false) as Label
+	actions = side.find_child("Actions", true, false) as HBoxContainer
+	roll_button = side.find_child("RollDice", true, false) as Button
+	roll_button.pressed.connect(_roll_clicked)
+	lobby_button = side.find_child("LobbyButton", true, false) as Button
+	lobby_button.pressed.connect(show_lobby)
+
+	pawn_buttons = side.find_child("PawnButtons", true, false) as GridContainer
+	choices = side.find_child("Choices", true, false) as VBoxContainer
+
+	var overview_btn := side.find_child("OverviewButton", true, false) as Button
+	overview_btn.pressed.connect(func(): camera.overview())
+	focus_button = side.find_child("FocusButton", true, false) as Button
+	focus_button.pressed.connect(_focus_selected)
+	var view_toggle_btn := side.find_child("ViewToggleButton", true, false) as Button
+	view_toggle_btn.pressed.connect(func(): camera.toggle_angle())
+
+	settings = side.find_child("Settings", true, false) as MenuButton
 	var menu := settings.get_popup()
 	menu.add_item(tr("MENU_PROLOGUE"), 0)
 	menu.add_item(tr("MENU_RESTART_GUIDANCE"), 1)
@@ -264,12 +221,11 @@ func _build_ui() -> void:
 	menu.add_item(tr("MENU_AUDIO_SETTINGS"), 6)
 	menu.set_item_checked(menu.get_item_index(5), not audio.enabled)
 	menu.id_pressed.connect(_menu_action)
-	var history_panel := _panel(box)
-	history_panel.name = "HistoryPanel"
-	history_label = _label(history_panel, "", 13, Color("8eafc0"))
-	history_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	history_label.custom_minimum_size.x = 230
+
+	var history_panel := side.find_child("HistoryPanel", true, false) as PanelContainer
+	history_label = side.find_child("HistoryLabel", true, false) as Label
 	history_panel.hide()
+
 	cell_info = _label(ui, "", 14, Color("e0f5fc"))
 	cell_info.anchor_top = 1
 	cell_info.anchor_bottom = 1
@@ -278,7 +234,7 @@ func _build_ui() -> void:
 	cell_info.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_glow_material = _pawn_glow(Color("79ffff"))
 	_selected_glow = _pawn_glow(Color("fff3a6"))
-	guide_beacon = preload("res://GuideBeacon.gd").new()
+	guide_beacon = preload("res://src/UI/components/GuideBeacon.gd").new()
 	ui.add_child(guide_beacon)
 	_build_setup()
 	_build_dice_overlay()
@@ -322,23 +278,9 @@ func _label(parent: Node, text: String, size: int = 16, color: Color = Color("e4
 	return label
 
 func _extraction_progress(parent: Node, finished: int, color: Color) -> void:
-	var progress := HBoxContainer.new()
-	progress.name = "ExtractionProgress"
-	progress.add_theme_constant_override("separation", 6)
+	var progress := ExtractionProgressScene.instantiate()
 	parent.add_child(progress)
-	for slot in range(4):
-		var light := Panel.new()
-		light.custom_minimum_size = Vector2(10, 10)
-		light.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		light.tooltip_text = "%d of 4 crew home" % finished
-		var style := StyleBoxFlat.new()
-		style.bg_color = color if slot < finished else Color("102332")
-		style.border_color = color
-		style.set_border_width_all(1)
-		style.set_corner_radius_all(5)
-		light.add_theme_stylebox_override("panel", style)
-		progress.add_child(light)
-	_label(progress, "%d/4 home" % finished, 12, color)
+	progress.set_progress(finished, color)
 
 func _button(parent: Node, text: String, callback: Callable) -> Button:
 	var button := Button.new()
@@ -369,56 +311,40 @@ func _center_box(overlay: Control, width: float) -> VBoxContainer:
 	return _vbox(panel)
 
 func _build_setup() -> void:
-	setup_overlay = _overlay("Lobby")
-	var box := _center_box(setup_overlay, 650)
-	_label(box, tr("LOBBY_TITLE"), 28, Color("69e4eb"))
-	_label(box, tr("LOBBY_SUBTITLE"), 14)
-	player_count = OptionButton.new()
+	setup_overlay = LobbyOverlayScene.instantiate()
+	ui.add_child(setup_overlay)
+	player_count = setup_overlay.find_child("PlayerCount", true, false) as OptionButton
 	for count in [2, 3, 4]:
 		player_count.add_item(tr("LOBBY_PLAYERS_COUNT").replace("{count}", str(count)), count)
-	box.add_child(player_count)
 	player_count.item_selected.connect(_update_setup.unbind(1))
+
+	name_inputs.clear()
+	color_inputs.clear()
+	player_rows.clear()
 	for index in range(4):
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", 12)
-		box.add_child(row)
+		var row := setup_overlay.find_child("PlayerRow%d" % index, true, false) as HBoxContainer
 		player_rows.append(row)
-		_label(row, "%02d" % (index + 1), 16, Color("6b9cae"))
-		var name_field := LineEdit.new()
+		var name_field := row.find_child("NameInput", true, false) as LineEdit
 		name_field.placeholder_text = tr("LOBBY_PLAYER_NAME_PLACEHOLDER")
 		name_field.text = tr("LOBBY_PLAYER_DEFAULT").replace("{n}", str(index + 1))
-		name_field.max_length = 24
-		name_field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(name_field)
 		name_inputs.append(name_field)
-		var color_field := OptionButton.new()
-		color_field.custom_minimum_size.x = 210
+		var color_field := row.find_child("ColorInput", true, false) as OptionButton
 		for team in range(4):
 			color_field.add_item(Lore.profile(team).name, team)
 		color_field.select(DEFAULT_COLORS[index])
-		row.add_child(color_field)
-		color_inputs.append(color_field)
 		color_field.item_selected.connect(_preview_lobby_faction.bind(index).unbind(1))
-	var preview_panel := _panel(box)
-	var preview_row := HBoxContainer.new()
-	preview_row.add_theme_constant_override("separation", 18)
-	preview_panel.add_child(preview_row)
-	lobby_portrait = preload("res://AnimatedPortrait.gd").new()
-	lobby_portrait.custom_minimum_size = Vector2(150, 150)
-	preview_row.add_child(lobby_portrait)
-	var preview_text := _vbox(preview_row)
-	preview_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	lobby_faction_name = _label(preview_text, "", 20)
-	lobby_character = _label(preview_text, "", 16)
-	lobby_description = _label(preview_text, "", 14, Color("a1bdcc"))
-	lobby_description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	lobby_description.custom_minimum_size.x = 410
+		color_inputs.append(color_field)
+
+	lobby_portrait = setup_overlay.find_child("LobbyPortrait", true, false) as Control
+	lobby_faction_name = setup_overlay.find_child("FactionName", true, false) as Label
+	lobby_character = setup_overlay.find_child("CharacterName", true, false) as Label
+	lobby_description = setup_overlay.find_child("FactionDescription", true, false) as Label
 	_preview_lobby_faction(0)
-	fast_dice = CheckBox.new()
-	fast_dice.text = tr("LOBBY_FAST_DICE")
-	box.add_child(fast_dice)
-	setup_error = _label(box, "", 14, Color("ff8493"))
-	_button(box, tr("LOBBY_START_MATCH"), _start_match)
+
+	fast_dice = setup_overlay.find_child("FastDice", true, false) as CheckBox
+	setup_error = setup_overlay.find_child("SetupError", true, false) as Label
+	var start_btn := setup_overlay.find_child("StartMatchButton", true, false) as Button
+	start_btn.pressed.connect(_start_match)
 	_update_setup()
 
 func _update_setup() -> void:
@@ -490,33 +416,20 @@ func _start_match() -> void:
 	_refresh()
 
 func _build_dice_overlay() -> void:
-	dice_overlay = _overlay("DiceCinematic")
-	var box := _center_box(dice_overlay, 680)
-	dice_caption = _label(box, "DICE REACTOR / ROLLING", 23, Color("6be8ec"))
-	dice_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var container := SubViewportContainer.new()
-	container.custom_minimum_size = Vector2(640, 360)
-	container.stretch = true
-	box.add_child(container)
-	dice_viewport = SubViewport.new()
-	dice_viewport.name = "DiceViewport"
-	dice_viewport.size = Vector2i(640, 360)
-	dice_viewport.msaa_3d = Viewport.MSAA_4X
-	dice_viewport.use_hdr_2d = true
-	dice_viewport.own_world_3d = true
-	dice_viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
-	container.add_child(dice_viewport)
+	dice_overlay = DiceOverlayScene.instantiate()
+	ui.add_child(dice_overlay)
+	dice_caption = dice_overlay.find_child("DiceCaption", true, false) as Label
+	dice_viewport = dice_overlay.find_child("DiceViewport", true, false) as SubViewport
 	dice_stage = DiceScene.instantiate()
 	dice_viewport.add_child(dice_stage)
 	dice_stage.sound_cue.connect(func(key: String):
 		if key != "dice_impact": audio.play(key, int(game.players[game.current_player].color) if not game.players.is_empty() else -1))
 	dice_stage.collision_cue.connect(func(strength: float): audio.play("dice_impact", int(game.players[game.current_player].color) if not game.players.is_empty() else -1, strength))
-	dice_result = _label(box, "", 23)
-	dice_result.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	dice_result = dice_overlay.find_child("DiceResult", true, false) as Label
 	dice_stage.result_ready.connect(_dice_settled)
 	dice_stage.animation_skipped.connect(_dice_animation_skipped)
-	var skip_button := _button(box, tr("UI_SKIP_ANIMATION"), func(): dice_stage.skip())
-	skip_button.name = "SkipDiceAnimation"
+	var skip_button := dice_overlay.find_child("SkipDiceAnimation", true, false) as Button
+	skip_button.pressed.connect(func(): dice_stage.skip())
 	dice_overlay.hide()
 
 func _dice_animation_skipped() -> void:
@@ -604,7 +517,7 @@ func _refresh() -> void:
 		turn_marker.color = profile.color if index == game.current_player else Color.TRANSPARENT
 		turn_marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		row.add_child(turn_marker)
-		var portrait := preload("res://AnimatedPortrait.gd").new()
+		var portrait := preload("res://src/UI/components/AnimatedPortrait.gd").new()
 		portrait.set_character(int(entry.color))
 		portrait.custom_minimum_size = Vector2(38, 38)
 		row.add_child(portrait)
@@ -1041,18 +954,18 @@ func _add_log(text: String) -> void:
 func _show_victory() -> void:
 	_victory_shown = true
 	audio.play("victory")
-	victory_overlay = _overlay("Victory")
-	var box := _center_box(victory_overlay, 600)
+	victory_overlay = VictoryOverlayScene.instantiate()
+	ui.add_child(victory_overlay)
 	var team := int(game.players[game.winner].color)
-	var portrait := preload("res://AnimatedPortrait.gd").new()
+	var portrait := victory_overlay.find_child("VictoryPortrait", true, false) as Control
 	portrait.set_character(team, "celebrate")
-	portrait.custom_minimum_size = Vector2(300, 250)
-	box.add_child(portrait)
 	effects.burst(Vector3(0, .6, 0), board.player_colors[team])
-	_label(box, "THE WAY HOME", 29, board.player_colors[team])
-	_label(box, "%s wins!" % game.players[game.winner].name, 26)
-	_label(box, "All four crew have crossed the Loom. Their journey lives on.", 17)
-	_button(box, "Play again · return to lobby", show_lobby)
+	var title_lbl := victory_overlay.find_child("TitleLabel", true, false) as Label
+	title_lbl.add_theme_color_override("font_color", board.player_colors[team])
+	var winner_lbl := victory_overlay.find_child("WinnerLabel", true, false) as Label
+	winner_lbl.text = "%s wins!" % game.players[game.winner].name
+	var rematch_btn := victory_overlay.find_child("RematchButton", true, false) as Button
+	rematch_btn.pressed.connect(show_lobby)
 
 func _briefing_open() -> bool:
 	return is_instance_valid(faction_briefing) and faction_briefing.visible
@@ -1203,40 +1116,33 @@ func _menu_action(id: int) -> void:
 			_open_sound_settings()
 
 func _build_sound_settings() -> void:
-	sound_overlay = _overlay("SoundSettings")
-	var box := _center_box(sound_overlay, 520)
-	_label(box, "SOUND & PORTRAITS", 24, Color("6be0ec"))
-	for channel in ["effects", "dialogue"]:
-		_label(box, "Game effects" if channel == "effects" else "Dialogue chimes & text ticks", 17)
-		var slider := HSlider.new()
-		slider.name = "EffectsVolume" if channel == "effects" else "DialogueVolume"
-		slider.min_value = 0
-		slider.max_value = 1
-		slider.step = .01
-		slider.custom_minimum_size = Vector2(450, 32)
-		slider.value = audio.effects_volume if channel == "effects" else audio.dialogue_volume
-		box.add_child(slider)
-		slider.value_changed.connect(func(value: float): audio.set_volume(channel, value))
-	var mute := CheckBox.new()
-	mute.name = "MuteAudio"
-	mute.text = "Mute all sounds"
+	sound_overlay = SoundSettingsOverlayScene.instantiate()
+	ui.add_child(sound_overlay)
+	var effects_slider := sound_overlay.find_child("EffectsVolume", true, false) as HSlider
+	effects_slider.value = audio.effects_volume
+	effects_slider.value_changed.connect(func(val: float): audio.set_volume("effects", val))
+	var dialogue_slider := sound_overlay.find_child("DialogueVolume", true, false) as HSlider
+	dialogue_slider.value = audio.dialogue_volume
+	dialogue_slider.value_changed.connect(func(val: float): audio.set_volume("dialogue", val))
+
+	var mute := sound_overlay.find_child("MuteAudio", true, false) as CheckBox
 	mute.button_pressed = not audio.enabled
-	box.add_child(mute)
 	mute.toggled.connect(func(value: bool):
 		audio.set_muted(value)
 		settings.get_popup().set_item_checked(settings.get_popup().get_item_index(5), value)
 	)
-	var motion := CheckBox.new()
-	motion.name = "PortraitMotion"
-	motion.text = "Animate dialogue portraits"
+
+	var motion := sound_overlay.find_child("PortraitMotion", true, false) as CheckBox
 	motion.button_pressed = audio.portrait_motion
-	box.add_child(motion)
 	motion.toggled.connect(func(value: bool):
 		audio.portrait_motion = value
 		audio.save_preferences()
 	)
-	_button(box, "Preview effects", func(): audio.play("shield"))
-	_button(box, "Done", func(): sound_overlay.hide())
+
+	var preview_btn := sound_overlay.find_child("PreviewButton", true, false) as Button
+	preview_btn.pressed.connect(func(): audio.play("shield"))
+	var done_btn := sound_overlay.find_child("DoneButton", true, false) as Button
+	done_btn.pressed.connect(func(): sound_overlay.hide())
 	sound_overlay.hide()
 
 func _open_sound_settings() -> void:

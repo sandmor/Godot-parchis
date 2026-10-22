@@ -52,5 +52,6 @@ func complete(key: String) -> void:
 
 func reset() -> void:
 	seen.clear()
+	enabled = true
 	active = ""
 	save()
