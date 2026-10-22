@@ -9,7 +9,7 @@ func _capture() -> void:
 	viewport.transparent_bg = true
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	root.add_child(viewport)
-	var portrait := preload("res://AnimatedPortrait.gd").new()
+	var portrait := preload("res://src/UI/components/AnimatedPortrait.gd").new()
 	viewport.add_child(portrait)
 	portrait.size = viewport.size
 	portrait.set_process(false)

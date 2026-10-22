@@ -1,7 +1,7 @@
 extends "res://tests/support/test_case.gd"
 ## Full frames must retain the idle canvas and closely aligned silhouettes.
 ## Facial anatomy quality is reviewed visually, not inferred from pixel equality.
-const Portrait := preload("res://AnimatedPortrait.gd")
+const Portrait := preload("res://src/UI/components/AnimatedPortrait.gd")
 func _run() -> void:
 	var viewport := SubViewport.new()
 	viewport.transparent_bg = true

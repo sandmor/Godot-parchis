@@ -1,7 +1,7 @@
 extends SceneTree
 ## Inspect every full-frame expression on a lit backdrop, with a face close-up grid.
 const Lore := preload("res://Factions.gd")
-const Portrait := preload("res://AnimatedPortrait.gd")
+const Portrait := preload("res://src/UI/components/AnimatedPortrait.gd")
 const STATES := ["idle","speak_a","speak_b","blink","smile"]
 const NAMES := ["VOSS","SAEL","LYRA-7","REYES"]
 func _initialize() -> void: call_deferred("_capture")

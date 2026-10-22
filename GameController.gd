@@ -98,10 +98,6 @@ func _ready() -> void:
 	Lore.Manager._ensure_translations()
 	board = get_node("Board")
 	camera = get_node("Camera3D")
-	var old_hud := get_node_or_null("HUD")
-	if old_hud:
-		remove_child(old_hud)
-		old_hud.queue_free()
 	_rng.randomize()
 	highlights = Node3D.new()
 	highlights.name = "MoveHighlights"
@@ -257,12 +253,6 @@ func _style(background: Color, border: Color) -> StyleBoxFlat:
 	style.content_margin_bottom = 9
 	return style
 
-func _panel(parent: Node) -> PanelContainer:
-	var panel := PanelContainer.new()
-	panel.add_theme_stylebox_override("panel", _style(Color(0.025, 0.055, 0.085, 1.0), Color("31566d")))
-	parent.add_child(panel)
-	return panel
-
 func _vbox(parent: Node) -> VBoxContainer:
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 9)
@@ -289,26 +279,6 @@ func _button(parent: Node, text: String, callback: Callable) -> Button:
 	parent.add_child(button)
 	button.pressed.connect(callback)
 	return button
-
-func _overlay(node_name: String) -> Control:
-	var overlay := Control.new()
-	overlay.name = node_name
-	ui.add_child(overlay)
-	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var dim := ColorRect.new()
-	dim.color = Color(0.004, 0.009, 0.022, 0.8)
-	overlay.add_child(dim)
-	dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	return overlay
-
-func _center_box(overlay: Control, width: float) -> VBoxContainer:
-	var center := CenterContainer.new()
-	overlay.add_child(center)
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var panel := _panel(center)
-	panel.custom_minimum_size.x = width
-	return _vbox(panel)
 
 func _build_setup() -> void:
 	setup_overlay = LobbyOverlayScene.instantiate()

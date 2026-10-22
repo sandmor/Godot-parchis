@@ -81,7 +81,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 9
 
-[node name="@HSeparator@64" type="HSeparator" parent="Scroll/Content" unique_id=1967673461]
+[node name="Separator1" type="HSeparator" parent="Scroll/Content" unique_id=1967673461]
 layout_mode = 2
 
 [node name="TurnTitle" type="Label" parent="Scroll/Content" unique_id=2140080770]
@@ -150,7 +150,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="@HSeparator@65" type="HSeparator" parent="Scroll/Content" unique_id=1076212948]
+[node name="Separator2" type="HSeparator" parent="Scroll/Content" unique_id=1076212948]
 layout_mode = 2
 
 [node name="CameraRow" type="HBoxContainer" parent="Scroll/Content" unique_id=186371462]
