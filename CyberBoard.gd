@@ -39,7 +39,7 @@ var _materials: Dictionary = {}
 var _hologram: Node3D
 var _time := 0.0
 var coordinates_visible := false
-const Unit := preload("res://UnitVisual.gd")
+const PieceScene := preload("res://pieces/Piece.tscn")
 
 func _ready() -> void:
 	generate_board()
@@ -177,8 +177,8 @@ func _build_jails() -> void:
 			_ring(group, pawn_pos, 0.48 * tile_spacing, col)
 			pawn_nodes[team].append(_build_pawn(group, pawn_pos, team, slot))
 
-func _build_pawn(parent: Node3D, pos: Vector3, team: int, slot: int) -> Node3D:
-	var pawn := Unit.new()
+func _build_pawn(parent: Node3D, pos: Vector3, team: int, slot: int) -> Piece:
+	var pawn: Piece = PieceScene.instantiate()
 	pawn.name = "%s_Pawn_%d" % [TEAM_NAMES[team], slot + 1]
 	pawn.position = pos
 	pawn.scale = Vector3.ONE * tile_spacing

@@ -633,6 +633,12 @@ func _kill_pawn_tweens() -> void:
 		if tween.is_valid():
 			tween.kill()
 	_pawn_tweens.clear()
+	for team in range(4):
+		for pawn in range(4):
+			if is_instance_valid(board) and board.pawn_nodes.size() > team and board.pawn_nodes[team].size() > pawn:
+				var node = board.pawn_nodes[team][pawn]
+				if node and node.has_method("kill_movement"):
+					node.kill_movement()
 
 func _sync_pawns() -> void:
 	_kill_pawn_tweens()
@@ -650,9 +656,12 @@ func _sync_pawns() -> void:
 			var target := _pawn_position(owner_index, pawn)
 			node.scale = Vector3.ONE * float(board.tile_spacing) * (1.0 if game.pawns[owner_index][pawn] == -1 else 0.73)
 			if node.position.distance_to(target) > 0.01:
-				var tween := create_tween()
-				tween.tween_property(node, "position", target, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-				_pawn_tweens.append(tween)
+				if node.has_method("move_smooth_to"):
+					node.move_smooth_to(target, 0.3)
+				else:
+					var tween := create_tween()
+					tween.tween_property(node, "position", target, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+					_pawn_tweens.append(tween)
 
 func _position_for_progress(player: int, pawn: int, progress: int) -> Vector3:
 	var team := int(game.players[player].color)
@@ -935,27 +944,39 @@ func _execute_move(move: Dictionary) -> void:
 	var node: Node3D = board.pawn_nodes[team][int(move.pawn)]
 	var color: Color = board.player_colors[team]
 	audio.play("launch" if move.kind == "release" else "travel", team)
-	node.moving = true
-	if move.kind == "release": node.play_launch()
 	effects.follow(node, color)
 	effects.burst(node.position, color)
-	var tween := create_tween()
-	if move.kind == "release":
-		var destination := _position_for_progress(player, move.pawn, 0)
-		node.face_destination(destination)
-		tween.tween_property(node, "position", (node.position + destination) * 0.5 + Vector3(0, 2.5, 0), 0.22).set_trans(Tween.TRANS_SINE)
-		tween.tween_property(node, "position", destination, 0.22).set_trans(Tween.TRANS_SINE)
+	if node.has_method("move_release_to"):
+		if move.kind == "release":
+			var destination := _position_for_progress(player, move.pawn, 0)
+			await node.move_release_to(destination)
+		else:
+			var start := int(game.pawns[player][int(move.pawn)])
+			var waypoints: Array[Vector3] = []
+			for progress in range(start + 1, int(move.target) + 1):
+				waypoints.append(_position_for_progress(player, move.pawn, progress))
+			var destination := _position_for_progress(player, move.pawn, move.target)
+			await node.move_steps_to(waypoints, destination)
 	else:
-		var start := int(game.pawns[player][int(move.pawn)])
-		for progress in range(start + 1, int(move.target) + 1):
-			var destination := _position_for_progress(player, move.pawn, progress)
-			tween.tween_callback(node.face_destination.bind(destination))
-			tween.tween_property(node, "position", destination, node.step_duration())
-		tween.tween_property(node, "position", _position_for_progress(player, move.pawn, move.target), .12).set_trans(Tween.TRANS_SINE)
-	await tween.finished
+		node.moving = true
+		if move.kind == "release": node.play_launch()
+		var tween := create_tween()
+		if move.kind == "release":
+			var destination := _position_for_progress(player, move.pawn, 0)
+			node.face_destination(destination)
+			tween.tween_property(node, "position", (node.position + destination) * 0.5 + Vector3(0, 2.5, 0), 0.22).set_trans(Tween.TRANS_SINE)
+			tween.tween_property(node, "position", destination, 0.22).set_trans(Tween.TRANS_SINE)
+		else:
+			var start := int(game.pawns[player][int(move.pawn)])
+			for progress in range(start + 1, int(move.target) + 1):
+				var destination := _position_for_progress(player, move.pawn, progress)
+				tween.tween_callback(node.face_destination.bind(destination))
+				tween.tween_property(node, "position", destination, node.step_duration())
+			tween.tween_property(node, "position", _position_for_progress(player, move.pawn, move.target), .12).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+		node.moving = false
+		node.play_arrival()
 	audio.play("finish" if int(move.target) == Rules.FINISHED else "land")
-	node.moving = false
-	node.play_arrival()
 	effects.stop(node)
 	effects.burst(node.position, color)
 	guide.complete("release" if move.kind == "release" else "move")
@@ -992,11 +1013,14 @@ func _execute_bonus(pawn: int) -> void:
 	var team := int(game.players[game.current_player].color)
 	var node: Node3D = board.pawn_nodes[team][pawn]
 	audio.play("launch", team)
-	node.play_launch()
-	var tween := create_tween()
-	tween.tween_property(node, "position", Vector3(0, 3, 0), 0.6).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(node, "position", Vector3(0, 0.6, 0), 0.3)
-	await tween.finished
+	if node.has_method("move_bonus_to"):
+		await node.move_bonus_to(Vector3(0, 0.6, 0))
+	else:
+		node.play_launch()
+		var tween := create_tween()
+		tween.tween_property(node, "position", Vector3(0, 3, 0), 0.6).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(node, "position", Vector3(0, 0.6, 0), 0.3)
+		await tween.finished
 	effects.burst(Vector3(0, .5, 0), board.player_colors[team])
 	audio.play("finish")
 	guide.complete("bonus")

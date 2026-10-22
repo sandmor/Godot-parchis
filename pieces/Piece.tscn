@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://pieces/Piece.gd" id="1_piece"]
+[ext_resource type="Script" path="res://pieces/PieceVisual.gd" id="2_visual"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_piece"]
+height = 1.6
+radius = 0.55
+
+[node name="Piece" type="Area3D"]
+script = ExtResource("1_piece")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CylinderShape3D_piece")
+
+[node name="Visual" type="Node3D" parent="."]
+script = ExtResource("2_visual")
+

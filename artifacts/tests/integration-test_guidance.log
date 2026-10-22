@@ -1,0 +1,12 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+
+WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.
+   at: environment_set_ssao (servers/rendering/storage/environment_storage.cpp:700)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://DiceThrow.gd:47)
+       [1] _build_dice_overlay (res://GameController.gd:509)
+       [2] _build_ui (res://GameController.gd:283)
+       [3] _ready (res://GameController.gd:112)
+       [4] load_game (res://tests/support/test_case.gd:21)
+       [5] _run (res://tests/integration/test_guidance.gd:7)
+PASS: 120 checks: guidance checks, real actions, optional controls, persistence and effect cleanup
