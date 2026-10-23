@@ -201,10 +201,25 @@ text = "Tirada de dados y turnos rápidos"
 [node name="Separator3" type="HSeparator" parent="Center/CardPanel/Margin/Content"]
 layout_mode = 2
 
-[node name="BtnBack" type="Button" parent="Center/CardPanel/Margin/Content"]
+[node name="ButtonsRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BtnQuitMatch" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsRow"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.5, 1)
+text = "Salir de la Partida"
+
+[node name="BtnBack" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsRow"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Volver al Menú Principal"
 

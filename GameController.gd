@@ -1171,9 +1171,8 @@ func _sound_settings_open() -> bool:
 func _build_options_menu() -> void:
 	options_overlay = OptionsMenuScene.instantiate()
 	ui.add_child(options_overlay)
-	var back_btn := options_overlay.find_child("BtnBack", true, false) as Button
-	if back_btn:
-		back_btn.text = "Volver a la Partida"
+	if options_overlay.has_method("set_in_game_mode"):
+		options_overlay.set_in_game_mode(true)
 	options_overlay.back_pressed.connect(_close_options_menu)
 	options_overlay.hide()
 

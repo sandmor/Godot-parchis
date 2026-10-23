@@ -2,6 +2,7 @@ extends Control
 class_name OptionsMenu
 
 signal back_pressed
+signal quit_match_pressed
 
 # Audio sliders and labels
 @onready var master_slider: HSlider = %MasterSlider
@@ -15,12 +16,25 @@ signal back_pressed
 @onready var fullscreen_check: CheckBox = %FullscreenCheck
 @onready var fast_anim_check: CheckBox = %FastAnimCheck
 @onready var btn_back: Button = %BtnBack
+@onready var btn_quit_match: Button = %BtnQuitMatch
+
+var is_in_game: bool = false
 
 func _ready() -> void:
 	_init_audio_controls()
 	_init_display_controls()
 	_init_gameplay_controls()
 	btn_back.pressed.connect(_on_back_pressed)
+	if btn_quit_match:
+		btn_quit_match.pressed.connect(_on_quit_match_pressed)
+	set_in_game_mode(is_in_game)
+
+func set_in_game_mode(in_game: bool) -> void:
+	is_in_game = in_game
+	if btn_quit_match:
+		btn_quit_match.visible = in_game
+	if btn_back:
+		btn_back.text = "Continuar Partida" if in_game else "Volver al Menú Principal"
 
 func _init_audio_controls() -> void:
 	# Default mock values
@@ -75,5 +89,15 @@ func _init_gameplay_controls() -> void:
 	)
 
 func _on_back_pressed() -> void:
-	print("[OptionsMenu] Volviendo al Menú Principal...")
+	print("[OptionsMenu] Volviendo...")
 	back_pressed.emit()
+
+func _on_quit_match_pressed() -> void:
+	print("[OptionsMenu] 🚪 Saliendo de la partida actual hacia el Menú Principal...")
+	quit_match_pressed.emit()
+	if ResourceLoader.exists("res://src/UI/menus/MenuManager.tscn"):
+		var err := get_tree().change_scene_to_file("res://src/UI/menus/MenuManager.tscn")
+		if err != OK:
+			printerr("[OptionsMenu] Error volviendo a MenuManager.tscn: ", err)
+	else:
+		printerr("[OptionsMenu] No se encontró MenuManager.tscn")
