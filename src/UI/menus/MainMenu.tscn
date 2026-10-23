@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://mainmenu0001"]
+
+[ext_resource type="Script" path="res://src/UI/menus/MainMenu.gd" id="1_menu"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="DimBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.02, 0.035, 0.88)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardPanel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Center/CardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Content" type="VBoxContainer" parent="Center/CardPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="HeaderBox" type="VBoxContainer" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="GameTitle" type="Label" parent="Center/CardPanel/Margin/Content/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.411765, 0.894118, 0.921569, 1)
+theme_override_font_sizes/font_size = 36
+text = "PARQUÉS"
+horizontal_alignment = 1
+
+[node name="GameSubtitle" type="Label" parent="Center/CardPanel/Margin/Content/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.384314, 0.74902, 0.788235, 1)
+theme_override_font_sizes/font_size = 13
+text = "CYBERNETIC ARENA  /  PROYECTO UNIVERSITARIO"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BtnLocal" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnQuit")
+focus_neighbor_bottom = NodePath("../BtnMultiplayer")
+mouse_default_cursor_shape = 2
+text = "Partida Local"
+
+[node name="BtnMultiplayer" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnLocal")
+focus_neighbor_bottom = NodePath("../BtnTutorial")
+mouse_default_cursor_shape = 2
+text = "Multijugador"
+
+[node name="BtnTutorial" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnMultiplayer")
+focus_neighbor_bottom = NodePath("../BtnOptions")
+mouse_default_cursor_shape = 2
+text = "Tutorial"
+
+[node name="BtnOptions" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnTutorial")
+focus_neighbor_bottom = NodePath("../BtnQuit")
+mouse_default_cursor_shape = 2
+text = "Opciones"
+
+[node name="BtnQuit" type="Button" parent="Center/CardPanel/Margin/Content/ButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BtnOptions")
+focus_neighbor_bottom = NodePath("../BtnLocal")
+mouse_default_cursor_shape = 2
+text = "Salir"
+
+[node name="FooterLabel" type="Label" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.45, 0.52, 1)
+theme_override_font_sizes/font_size = 11
+text = "Godot 4.x Engine • UI Prototype"
+horizontal_alignment = 1
+

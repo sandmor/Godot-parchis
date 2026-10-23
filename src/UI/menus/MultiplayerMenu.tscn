@@ -1,0 +1,275 @@
+[gd_scene format=3 uid="uid://multiplayermenu01"]
+
+[ext_resource type="Script" path="res://src/UI/menus/MultiplayerMenu.gd" id="1_mp"]
+
+[node name="MultiplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mp")
+
+[node name="DimBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012, 0.02, 0.035, 0.88)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardPanel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Center/CardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="Center/CardPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderBox" type="VBoxContainer" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Center/CardPanel/Margin/Content/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.411765, 0.894118, 0.921569, 1)
+theme_override_font_sizes/font_size = 24
+text = "MULTIJUGADOR"
+
+[node name="Subtitle" type="Label" parent="Center/CardPanel/Margin/Content/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.384314, 0.74902, 0.788235, 1)
+theme_override_font_sizes/font_size = 13
+text = "Conéctate con otros jugadores mediante red o código de invitación"
+
+[node name="Separator" type="HSeparator" parent="Center/CardPanel/Margin/Content"]
+layout_mode = 2
+
+[node name="ModeSelectView" type="VBoxContainer" parent="Center/CardPanel/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BtnChooseHost" type="Button" parent="Center/CardPanel/Margin/Content/ModeSelectView"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Crear Sala (Host)"
+
+[node name="BtnChooseJoin" type="Button" parent="Center/CardPanel/Margin/Content/ModeSelectView"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Unirse a Sala (Join)"
+
+[node name="BtnBackToMain" type="Button" parent="Center/CardPanel/Margin/Content/ModeSelectView"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Volver al Menú Principal"
+
+[node name="HostView" type="VBoxContainer" parent="Center/CardPanel/Margin/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CodeRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/HostView"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CodeLabel" type="Label" parent="Center/CardPanel/Margin/Content/HostView/CodeRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Código de Invitación:"
+
+[node name="RoomCodeDisplay" type="LineEdit" parent="Center/CardPanel/Margin/Content/HostView/CodeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_uneditable_color = Color(0.411765, 0.894118, 0.921569, 1)
+text = "PARQUE-4821"
+alignment = 1
+editable = false
+
+[node name="BtnCopyCode" type="Button" parent="Center/CardPanel/Margin/Content/HostView/CodeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 36)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Copiar"
+
+[node name="CountRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/HostView"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HostCountLabel" type="Label" parent="Center/CardPanel/Margin/Content/HostView/CountRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Capacidad de la Sala:"
+
+[node name="HostPlayerCount" type="OptionButton" parent="Center/CardPanel/Margin/Content/HostView/CountRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HostNoticeLabel" type="Label" parent="Center/CardPanel/Margin/Content/HostView"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.65, 0.75, 1)
+theme_override_font_sizes/font_size = 12
+text = "ℹ️ Como anfitrión, solo puedes configurar tu nombre. Los demás asientos esperan conexión remota."
+
+[node name="HostSlotsScroll" type="ScrollContainer" parent="Center/CardPanel/Margin/Content/HostView"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HostSlotsContainer" type="VBoxContainer" parent="Center/CardPanel/Margin/Content/HostView/HostSlotsScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="SimulateRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/HostView"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BtnSimulatePlayer" type="Button" parent="Center/CardPanel/Margin/Content/HostView/SimulateRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 12
+text = "➕ Simular Conexión de Jugador Remoto"
+
+[node name="HostStatusLabel" type="Label" parent="Center/CardPanel/Margin/Content/HostView"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.384314, 0.74902, 0.788235, 1)
+theme_override_font_sizes/font_size = 13
+text = "Esperando jugadores... (1/4 conectados)"
+
+[node name="HostButtons" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/HostView"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BtnHostBack" type="Button" parent="Center/CardPanel/Margin/Content/HostView/HostButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Atrás"
+
+[node name="BtnHostStart" type="Button" parent="Center/CardPanel/Margin/Content/HostView/HostButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Esperando jugadores... / Iniciar"
+
+[node name="JoinView" type="VBoxContainer" parent="Center/CardPanel/Margin/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="NameRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/JoinView"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NameLabel" type="Label" parent="Center/CardPanel/Margin/Content/JoinView/NameRow"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Tu Nombre:"
+
+[node name="JoinNameInput" type="LineEdit" parent="Center/CardPanel/Margin/Content/JoinView/NameRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Invitado"
+
+[node name="FactionRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/JoinView"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FactionLabel" type="Label" parent="Center/CardPanel/Margin/Content/JoinView/FactionRow"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Facción Preferida:"
+
+[node name="JoinFactionOption" type="OptionButton" parent="Center/CardPanel/Margin/Content/JoinView/FactionRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CodeRow" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/JoinView"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CodeLabel" type="Label" parent="Center/CardPanel/Margin/Content/JoinView/CodeRow"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Código de Sala:"
+
+[node name="JoinCodeInput" type="LineEdit" parent="Center/CardPanel/Margin/Content/JoinView/CodeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Ej. PARQUE-4821"
+
+[node name="JoinStatusLabel" type="Label" parent="Center/CardPanel/Margin/Content/JoinView"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.45, 1)
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 3
+
+[node name="JoinButtons" type="HBoxContainer" parent="Center/CardPanel/Margin/Content/JoinView"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BtnJoinBack" type="Button" parent="Center/CardPanel/Margin/Content/JoinView/JoinButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Atrás"
+
+[node name="BtnConnect" type="Button" parent="Center/CardPanel/Margin/Content/JoinView/JoinButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Conectar"

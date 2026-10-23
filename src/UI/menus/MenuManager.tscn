@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cymdqntqjc8oy"]
+
+[ext_resource type="Script" path="res://src/UI/menus/MenuManager.gd" id="1_mgr"]
+[ext_resource type="PackedScene" uid="uid://mainmenu0001" path="res://src/UI/menus/MainMenu.tscn" id="2_main"]
+[ext_resource type="PackedScene" uid="uid://localsetup001" path="res://src/UI/menus/LocalSetup.tscn" id="3_local"]
+[ext_resource type="PackedScene" uid="uid://multiplayermenu01" path="res://src/UI/menus/MultiplayerMenu.tscn" id="4_mp"]
+[ext_resource type="PackedScene" uid="uid://optionsmenu0001" path="res://src/UI/menus/OptionsMenu.tscn" id="5_opt"]
+
+[node name="MenuManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mgr")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_main")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="LocalSetup" parent="." instance=ExtResource("3_local")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="MultiplayerMenu" parent="." instance=ExtResource("4_mp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("5_opt")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+

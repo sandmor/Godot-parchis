@@ -2,6 +2,7 @@ class_name Factions
 extends RefCounted
 ## Lore/presentation facade: faction choice never changes a legal move or dice odds.
 ## Bridges legacy callers and tests to the modular architecture in src/factions/
+# TODO: Adjust test to use the new FactionManager API instead of this facade.
 
 const Manager := preload("res://src/factions/FactionManager.gd")
 

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://pslot0000001"]
+
+[ext_resource type="Script" path="res://src/UI/menus/PlayerSlot.gd" id="1_slot"]
+
+[node name="PlayerSlot" type="HBoxContainer"]
+offset_right = 580.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 1
+script = ExtResource("1_slot")
+
+[node name="NumberLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.419608, 0.611765, 0.682353, 1)
+theme_override_font_sizes/font_size = 16
+text = "01"
+vertical_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Nombre Jugador 1"
+max_length = 24
+clear_button_enabled = true
+
+[node name="FactionOption" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(180, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+
+[node name="RoleBadge" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.411765, 0.894118, 0.921569, 1)
+theme_override_font_sizes/font_size = 12
+text = "Host"
+horizontal_alignment = 1
+vertical_alignment = 1
+

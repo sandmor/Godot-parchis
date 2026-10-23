@@ -12,6 +12,7 @@ const LobbyOverlayScene := preload("res://src/UI/overlays/LobbyOverlay.tscn")
 const DiceOverlayScene := preload("res://src/UI/overlays/DiceOverlay.tscn")
 const SoundSettingsOverlayScene := preload("res://src/UI/overlays/SoundSettingsOverlay.tscn")
 const VictoryOverlayScene := preload("res://src/UI/overlays/VictoryOverlay.tscn")
+const OptionsMenuScene := preload("res://src/UI/menus/OptionsMenu.tscn")
 const CyberTheme := preload("res://src/UI/theme/cyber_theme.tres")
 const DEFAULT_COLORS := [0, 2, 1, 3]
 var game := Rules.new()
@@ -33,6 +34,7 @@ var _reaction_text := ""
 var _reaction_until := 0.0
 var _reaction_team := 0
 var sound_overlay: Control
+var options_overlay: Control
 @export var remember_audio_settings := true
 var board: Node3D
 var camera: Camera3D
@@ -115,12 +117,20 @@ func _ready() -> void:
 	_build_backdrop()
 	_build_ui()
 	game.changed.connect(_on_game_changed)
-	show_lobby()
+	
+	var match_config: Node = get_node_or_null("/root/MatchConfig")
+	if match_config and match_config.has_pending_match():
+		var entries: Array[Dictionary] = match_config.consume_match_players()
+		if is_instance_valid(fast_dice) and match_config.pending_fast_dice:
+			fast_dice.button_pressed = true
+		start_match_with_entries(entries)
+	else:
+		show_lobby()
 
 func _process(delta: float) -> void:
 	_clock += delta
 	if is_instance_valid(command_dock) and is_instance_valid(setup_overlay) and is_instance_valid(dice_overlay):
-		command_dock.visible = not setup_overlay.visible and not dice_overlay.visible and not _briefing_open() and game.phase != "game_over"
+		command_dock.visible = not setup_overlay.visible and not dice_overlay.visible and not _briefing_open() and not _options_menu_open() and game.phase != "game_over"
 	if is_instance_valid(faction_card):
 		_refresh_guidance()
 		faction_portrait.speaking = faction_card.is_visible_in_tree() and comms_reveal.revealing
@@ -215,6 +225,7 @@ func _build_ui() -> void:
 	menu.add_item(tr("MENU_CAMERA_CONTROLS"), 4)
 	menu.add_check_item(tr("MENU_MUTE_SOUND"), 5)
 	menu.add_item(tr("MENU_AUDIO_SETTINGS"), 6)
+	menu.add_item("Opciones Generales", 7)
 	menu.set_item_checked(menu.get_item_index(5), not audio.enabled)
 	menu.id_pressed.connect(_menu_action)
 
@@ -240,6 +251,7 @@ func _build_ui() -> void:
 	faction_briefing.audio = audio
 	faction_briefing.closed.connect(_on_briefing_closed)
 	_build_sound_settings()
+	_build_options_menu()
 
 func _style(background: Color, border: Color) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
@@ -384,6 +396,32 @@ func _start_match() -> void:
 	setup_overlay.hide()
 	_selected = -1
 	_refresh()
+
+func start_match_with_entries(entries: Array[Dictionary]) -> bool:
+	if entries.size() >= 2 and entries.size() <= 4:
+		for idx in range(entries.size()):
+			if idx < name_inputs.size():
+				name_inputs[idx].text = entries[idx].name
+			if idx < color_inputs.size():
+				color_inputs[idx].select(entries[idx].color)
+		if is_instance_valid(player_count):
+			for idx in range(player_count.item_count):
+				if player_count.get_item_id(idx) == entries.size():
+					player_count.select(idx)
+					break
+		_update_setup()
+	
+	if not game.configure(entries):
+		printerr("[GameController] Error configurando partida con entries: ", entries)
+		return false
+	if is_instance_valid(setup_overlay):
+		setup_overlay.hide()
+	_selected = -1
+	_refresh()
+	print("[GameController] 🎲 Partida iniciada con éxito desde el Menú Principal con %d jugadores:" % entries.size())
+	for e in entries:
+		print("   -> Jugador: '%s' | Color/Facción: %d" % [e.name, e.color])
+	return true
 
 func _build_dice_overlay() -> void:
 	dice_overlay = DiceOverlayScene.instantiate()
@@ -943,7 +981,7 @@ func _briefing_open() -> bool:
 	return is_instance_valid(faction_briefing) and faction_briefing.visible
 
 func is_board_input_locked() -> bool:
-	return _busy or _briefing_open() or (is_instance_valid(sound_overlay) and sound_overlay.visible) or (is_instance_valid(setup_overlay) and setup_overlay.visible) or (is_instance_valid(dice_overlay) and dice_overlay.visible)
+	return _busy or _briefing_open() or _options_menu_open() or (is_instance_valid(sound_overlay) and sound_overlay.visible) or (is_instance_valid(setup_overlay) and setup_overlay.visible) or (is_instance_valid(dice_overlay) and dice_overlay.visible)
 
 func _preview_lobby_faction(seat: int) -> void:
 	if not is_instance_valid(lobby_portrait):
@@ -1086,6 +1124,8 @@ func _menu_action(id: int) -> void:
 			settings.get_popup().set_item_checked(settings.get_popup().get_item_index(id), not audio.enabled)
 		6:
 			_open_sound_settings()
+		7:
+			_open_options_menu()
 
 func _build_sound_settings() -> void:
 	sound_overlay = SoundSettingsOverlayScene.instantiate()
@@ -1128,10 +1168,41 @@ func _open_sound_settings() -> void:
 func _sound_settings_open() -> bool:
 	return is_instance_valid(sound_overlay) and sound_overlay.visible
 
+func _build_options_menu() -> void:
+	options_overlay = OptionsMenuScene.instantiate()
+	ui.add_child(options_overlay)
+	var back_btn := options_overlay.find_child("BtnBack", true, false) as Button
+	if back_btn:
+		back_btn.text = "Volver a la Partida"
+	options_overlay.back_pressed.connect(_close_options_menu)
+	options_overlay.hide()
+
+func _open_options_menu() -> void:
+	if _busy or _briefing_open() or (is_instance_valid(setup_overlay) and setup_overlay.visible):
+		return
+	if is_instance_valid(options_overlay):
+		options_overlay.show()
+		print("[GameController] ⚙️ Menú de opciones abierto (overlay en partida activa).")
+
+func _close_options_menu() -> void:
+	if is_instance_valid(options_overlay):
+		options_overlay.hide()
+		print("[GameController] ⚙️ Menú de opciones cerrado. Partida reanudada.")
+
+func _options_menu_open() -> bool:
+	return is_instance_valid(options_overlay) and options_overlay.visible
+
 func _unhandled_key_input(event: InputEvent) -> void:
-	if _sound_settings_open() and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		sound_overlay.hide()
-		get_viewport().set_input_as_handled()
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		if _options_menu_open():
+			_close_options_menu()
+			get_viewport().set_input_as_handled()
+		elif _sound_settings_open():
+			sound_overlay.hide()
+			get_viewport().set_input_as_handled()
+		elif not setup_overlay.visible and game.phase != "lobby" and not _busy and not _briefing_open():
+			_open_options_menu()
+			get_viewport().set_input_as_handled()
 
 func _react(event: String, team: int) -> void:
 	_comms_id = ""

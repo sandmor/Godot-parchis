@@ -1,8 +1,8 @@
 extends RigidBody3D
 ## One machined shell and six flush, inset pip panels. No protruding pip meshes.
 signal collision_hit(strength: float, point: Vector3)
-const ENERGY_SHADER := preload("res://shaders/reactor_energy.gdshader")
-const FACE_SHADER := preload("res://shaders/reactor_die.gdshader")
+const ENERGY_SHADER := preload("res://src/shaders/reactor_energy.gdshader")
+const FACE_SHADER := preload("res://src/shaders/reactor_die.gdshader")
 const NORMALS := [Vector3.UP,Vector3.BACK,Vector3.RIGHT,Vector3.LEFT,Vector3.FORWARD,Vector3.DOWN]
 var face_materials: Array[ShaderMaterial] = []
 var shell_material: StandardMaterial3D

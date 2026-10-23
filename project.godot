@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Parques"
-run/main_scene="res://MainGame.tscn"
+run/main_scene="res://src/UI/menus/MenuManager.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MatchConfig="*res://src/data/MatchConfig.gd"
 
 [display]
 
