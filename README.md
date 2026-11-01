@@ -27,6 +27,9 @@ The four lights beneath each player's name track pawns that have reached the goa
 **Options** contains guidance, sound settings, and the optional move list.
 **Setup** returns to player selection for a new match.
 
+The interface defaults to English. **Options → Language → Español** switches to
+Spanish and saves the choice.
+
 **Camera:** wheel to zoom, middle-drag to pan, right-drag to orbit, **T** for top
 view, **G** to toggle the angle. **Overview** restores the full board.
 
